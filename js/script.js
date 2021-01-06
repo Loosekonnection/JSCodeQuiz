@@ -43,6 +43,7 @@ function quizStart() {
 
 // shows next question
 function nextQuestion() {
+    resetContainers()
     showQuestion(shuffledQuestions[currentQuestionIndex]);
 };
 
@@ -55,12 +56,31 @@ function showQuestion(question) {
     question.answers.forEach(answer => {
         var button = document.createElement("button");
         button.innerText = answer.text;
-        answersDiv.appendChild(button);
         button.setAttribute("class", "answerBtn");
+        if (answer.correct) {
+            button.dataset.correct = answer.correct
+        }
+        button.addEventListener('click', selectAnswer);
+        answersDiv.appendChild(button);
     });
 };
 
-function selectAnswer() {
+function resetContainers() {
+    while (answersDiv.firstChild) {
+        answersDiv.removeChild(answersDiv.firstChild)
+    }
+}
+
+function selectAnswer(answer) {
+    var selectedAnswer = answer.target;
+    var correct = selectedAnswer.dataset.correct
+    if (correct) {
+        shuffledQuestions.length > currentQuestionIndex + 1;
+        currentQuestionIndex++;
+        nextQuestion();
+    };
+
+
 
 };
 
