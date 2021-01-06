@@ -43,17 +43,28 @@
     <!-- Main Section-->
     <main class="container border border-gray bg-white">
         <div class="row">
-            <div class="col border-bottom border-gray text-center m-sm-4 m-2">
+            <div class="col border-bottom border-gray text-center m-sm-4 m-2" id="timer">
                 <h2>JavaScript Coding Quiz</h2>
             </div>
         </div>
         <div class="row m-sm-4 m-2">
-            <div class="col col-md-12 text-center">         
+            <div class="col col-md-12 text-center" id="questionCont">         
 
-                <h5>Try to answer the following JavaScript code-related questions within the time limit.</h5>
+                <h5>Try to answer the following JavaScript code-related questions within the 60 second time limit.</h5>
                 <p>Keep in mind that each incorrect answer will penalise your scoretime by ten seconds!</p>
-                <button type="button" class="btn btn-secondary">Start Quiz</button>
+                <button type="button" class="btn btn-secondary" id="startBtn">Start Quiz</button>
+                <hr>
 
+            </div>
+        </div>
+        <div class="row m-sm-4 m-2">
+            <div class="col col-md-12" id="answersCont">         
+
+            </div>
+        </div>
+        <div class="row m-sm-4 m-2">
+            <div class="col col-md-12" id="resultsCont">         
+                
             </div>
         </div>
     </main>
