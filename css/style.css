@@ -3,7 +3,9 @@ body {
 }
 
 .noScore {
+    text-align: center;
     font-size: large;
+    font-weight: bold;
     color: rgb(255, 0, 0);
 }
 

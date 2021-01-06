@@ -3,27 +3,55 @@ var startButton = document.getElementById("startBtn");
 var questionDiv = document.getElementById("questionCont");
 var answersDiv = document.getElementById("answersCont");
 var resultsDiv = document.getElementById("resultsCont");
-var timer = document.getElementById("timer");
 
-// Shuffled Questions
+
+// Shuffle Questions
 var shuffledQuestions, currentQuestionIndex
 
 // Score
 var score = 0;
 
-// on click of 'Start Quiz' button start the timer
-startButton.addEventListener('click', quizStart);
+// on click of 'Start Quiz' button start the quizStart function
+startButton.addEventListener('click', countdown);
 
-// Start quiz function
+// 60 second timer variable
+var seconds = 60;
+
+// Countdown timer
+function countdown() {
+    quizStart();
+    interval = setInterval(function () {
+        if (seconds <= -1) {
+            resultsDiv.removeChild(resultsDiv.firstChild);
+            questionDiv.removeChild(questionDiv.firstChild);
+            clearInterval(interval);
+            resetContainers();
+
+            var endMsg = document.createElement("p");
+            endMsg.textContent = "You didn't score this time, Please try again!";
+            answersDiv.appendChild(endMsg);
+            endMsg.setAttribute("class", "noScore");
+            return;
+
+        } else {
+            
+        }
+        document.getElementById("timer").innerHTML = " Time: " + seconds + " secs";
+        seconds--;
+    }, 1000);
+}
+
+// Start quiz function also starts the countdown
 function quizStart() {
+    // countdown();
     shuffledQuestions = questions.sort(() => Math.random() - .5);
-    currentQuestionIndex = 0
-    nextQuestion()
+    currentQuestionIndex = 0;
+    nextQuestion();
 };
 
 // shows next question
 function nextQuestion() {
-    resetContainers()
+    resetContainers();
     showQuestion(shuffledQuestions[currentQuestionIndex]);
 };
 
@@ -38,7 +66,7 @@ function showQuestion(question) {
         button.innerText = answer.text;
         button.setAttribute("class", "answerBtn");
         if (answer.correct) {
-            button.dataset.correct = answer.correct
+            button.dataset.correct = answer.correct;
         }
         button.addEventListener('click', selectAnswer);
         answersDiv.appendChild(button);
@@ -56,7 +84,7 @@ function resetContainers() {
 function selectAnswer(answer) {
     resultsDiv.removeChild(resultsDiv.firstChild);
     var selectedAnswer = answer.target;
-    var correct = selectedAnswer.dataset.correct
+    var correct = selectedAnswer.dataset.correct;
     if (correct) {
 
         var correctMsg = document.createElement("div");
@@ -67,13 +95,15 @@ function selectAnswer(answer) {
         shuffledQuestions.length > currentQuestionIndex + 1;
         currentQuestionIndex++;
         nextQuestion();
-      
+
     } else {
 
         var wrongMsg = document.createElement("div");
         wrongMsg.textContent = "Wrong!";
         resultsDiv.appendChild(wrongMsg);
         wrongMsg.setAttribute("class", "result");
+
+        seconds -= 10;
 
         shuffledQuestions.length > currentQuestionIndex + 1;
         currentQuestionIndex++;
@@ -177,24 +207,3 @@ var questions = [
 ];
 
 
-// 60 second timer
-
-// Timer
-// function startTimer() {
-// var timeLeft = 5;
-// document.getElementById("timer").innerHTML = " Time: " + timeLeft + " secs";
-// timeLeft--;
-// var counter = setInterval(function () {
-// if (timeLeft <= 0) {
-
-// } else {
-
-// clearInterval(counter);
-// var endMsg = document.createElement("p");
-// endMsg.textContent = "You didn't score this time, Please try again!";
-// resultsDiv.appendChild(endMsg);
-// endMsg.setAttribute("class", "noScore");
-// }
-
-// }, 1000);
-// };
