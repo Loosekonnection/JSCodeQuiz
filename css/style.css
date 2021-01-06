@@ -1,3 +1,39 @@
 body {
     margin-bottom: 100px;    
 }
+
+.noScore {
+    font-size: large;
+    color: rgb(255, 0, 0);
+}
+
+.result {
+    font-size: large;
+    color: rgb(78, 77, 77);
+}
+
+.score {
+    font-size: large;
+    color: rgb(0, 4, 255);
+}
+
+.questions {
+    text-align: left;
+    font-size: large;
+    font-weight: bold;
+
+}
+
+.answerBtn {
+    display: grid;
+    background-color: #750b5b;
+    border-radius: 5px;
+    padding: 5px 10px;
+    margin: 5px;
+    color: #eee;
+    outline: none;
+}
+
+.answerBtn:hover {
+    background-color: #96658a;
+}
