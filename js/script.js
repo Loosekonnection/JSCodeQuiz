@@ -1,44 +1,24 @@
+// Variables of HTML id's
+var startButton = document.getElementById("startBtn");
+var questionDiv = document.getElementById("questionCont");
+var answersDiv = document.getElementById("answersCont");
+var resultsDiv = document.getElementById("resultsCont");
+var timer = document.getElementById("timer");
+
 // Shuffled Questions
 var shuffledQuestions, currentQuestionIndex
 
-// Variables of HTML id's
-var startButton = document.getElementById("startBtn");
-var timer = document.getElementById("timer");
-var questionDiv = document.getElementById("questionCont");
-var answersDiv = document.getElementById("answersCont");
-var resultsDiv = document.getElementById("results");
-
-// score
+// Score
 var score = 0;
 
 // on click of 'Start Quiz' button start the timer
-startButton.addEventListener('click', quizStart)
+startButton.addEventListener('click', quizStart);
 
-// 60 second timer
-var count = 5;
-
-// Timer
-// function startTimer(){
-//     counter = setInterval(function(){quizStart()}, 1000);
-// }
-
-// Quiz Starts from startTimer
+// Start quiz function
 function quizStart() {
-    // document.getElementById("timer").innerHTML=" Time: " + count + " secs";
-    // count--;
-    // if (count >= 0){
     shuffledQuestions = questions.sort(() => Math.random() - .5);
     currentQuestionIndex = 0
     nextQuestion()
-
-    // } else {
-    //     clearInterval(counter);
-
-    //     var endMsg = document.createElement("p");
-    //         endMsg.textContent = "You didn't score this time, Please try again!";
-    //         resultsDiv.appendChild(endMsg);
-    //         endMsg.setAttribute("class", "noScore");
-    // }        
 };
 
 // shows next question
@@ -49,10 +29,10 @@ function nextQuestion() {
 
 // shows current question and multiple choices answers
 function showQuestion(question) {
-
+    // Display question
     questionDiv.innerText = question.question;
     questionDiv.setAttribute("class", "questions");
-
+    // Display answers
     question.answers.forEach(answer => {
         var button = document.createElement("button");
         button.innerText = answer.text;
@@ -65,26 +45,44 @@ function showQuestion(question) {
     });
 };
 
+// Resets container before displaying next question and answers
 function resetContainers() {
     while (answersDiv.firstChild) {
-        answersDiv.removeChild(answersDiv.firstChild)
+        answersDiv.removeChild(answersDiv.firstChild);
     }
-}
+};
 
+// Answer Selected
 function selectAnswer(answer) {
+    resultsDiv.removeChild(resultsDiv.firstChild);
     var selectedAnswer = answer.target;
     var correct = selectedAnswer.dataset.correct
     if (correct) {
+
+        var correctMsg = document.createElement("div");
+        correctMsg.textContent = "Correct!";
+        resultsDiv.appendChild(correctMsg);
+        correctMsg.setAttribute("class", "result");
+
         shuffledQuestions.length > currentQuestionIndex + 1;
         currentQuestionIndex++;
         nextQuestion();
-    };
+      
+    } else {
 
+        var wrongMsg = document.createElement("div");
+        wrongMsg.textContent = "Wrong!";
+        resultsDiv.appendChild(wrongMsg);
+        wrongMsg.setAttribute("class", "result");
 
+        shuffledQuestions.length > currentQuestionIndex + 1;
+        currentQuestionIndex++;
+        nextQuestion();
 
+    }
 };
 
-// Object containing 10 JavaScreipt questions
+// Array of Objects containing 10 JavaScreipt questions
 var questions = [
     {
         question: "Who invented JavaScript?",
@@ -179,3 +177,24 @@ var questions = [
 ];
 
 
+// 60 second timer
+
+// Timer
+// function startTimer() {
+// var timeLeft = 5;
+// document.getElementById("timer").innerHTML = " Time: " + timeLeft + " secs";
+// timeLeft--;
+// var counter = setInterval(function () {
+// if (timeLeft <= 0) {
+
+// } else {
+
+// clearInterval(counter);
+// var endMsg = document.createElement("p");
+// endMsg.textContent = "You didn't score this time, Please try again!";
+// resultsDiv.appendChild(endMsg);
+// endMsg.setAttribute("class", "noScore");
+// }
+
+// }, 1000);
+// };
