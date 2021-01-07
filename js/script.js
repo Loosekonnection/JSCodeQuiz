@@ -4,6 +4,7 @@ var questionDiv = document.getElementById("questionCont");
 var answersDiv = document.getElementById("answersCont");
 var resultsDiv = document.getElementById("resultsCont");
 var refreshButton = document.getElementById("clear-highscores");
+var timer = document.getElementById("timer");
 
 // Shuffle Questions variables
 var shuffledQuestions, currentQuestionIndex
@@ -14,41 +15,8 @@ var score = 0;
 // Counts total questions answered variable
 var totalQuestions = 0;
 
-// onClick button events
-// startButton.addEventListener('click', countdown);
+// onClick button event to start the quiz
 startButton.addEventListener('click', quizStart);
-
-// 60 second timer variable
-var seconds = 60;
-
-// Countdown timer starts the presentation of questions and answers
-function countdown() {
-    // quizStart();
-    interval = setInterval(function () {
-        if (seconds <= -1) {
-            clearInterval(interval);
-            resetContainers();
-            questionDiv.removeChild(questionDiv.firstChild);
-            resultsDiv.removeChild(resultsDiv.firstChild);
-
-            var endMsg = document.createElement("p");
-            endMsg.textContent = "You didn't score this time, Please try again!";
-            answersDiv.appendChild(endMsg);
-            endMsg.setAttribute("class", "noScore");
-
-            var tryAgainBtn = document.createElement("button");
-            tryAgainBtn.innerText = "Try Again";
-            resultsDiv.appendChild(tryAgainBtn);
-            tryAgainBtn.setAttribute("class", "btn btn-danger ");
-            // tryAgainBtn.addEventListener('click', window.location.reload());
-
-        } else {
-            score = seconds;
-        }
-        document.getElementById("timer").innerHTML = " Time: " + seconds + " secs";
-        seconds--;
-    }, 1000);
-}
 
 // Start quiz function also starts the countdown
 function quizStart() {
@@ -58,11 +26,46 @@ function quizStart() {
     nextQuestion();
 }
 
-// shows next question
+// 60 second timer variable
+var seconds = 60;
+
+// Countdown timer starts the presentation of questions and answers
+function countdown() {
+    interval = setInterval(function () {
+        if (seconds <= -1) {
+            clearInterval(interval);
+            resetContainers();
+            questionDiv.removeChild(questionDiv.firstChild);
+            resultsDiv.removeChild(resultsDiv.firstChild);
+            // Displays Game Over! if the timer runs out
+            var gameOverMsg = document.createElement("p");
+            gameOverMsg.textContent = "Game Over!";
+            answersDiv.appendChild(gameOverMsg);
+            gameOverMsg.setAttribute("class", "gameOver");
+            // Display Try Again message if the timer runs out
+            var endMsg = document.createElement("p");
+            endMsg.textContent = "You didn't score this time, Please try again!";
+            answersDiv.appendChild(endMsg);
+            endMsg.setAttribute("class", "noScore");
+            // Displays the Try Again button if the timer runs out
+            var tryAgainBtn = document.createElement("button");
+            tryAgainBtn.innerText = "Try Again";
+            resultsDiv.appendChild(tryAgainBtn);
+            tryAgainBtn.setAttribute("class", "btn btn-danger ");
+            // tryAgainBtn.addEventListener('click', window.location.reload());
+
+        } else {
+            score = seconds;
+        }
+        document.getElementById("timer").textContent = " Time: " + seconds + " secs";
+        seconds--;    
+    }, 1000);
+}
+
+// Generates next question 
 function nextQuestion() {
     totalQuestions++;
-    console.log("questions answered ", totalQuestions);
-    if (totalQuestions === 6) {
+    if (totalQuestions === 7) {
         clearInterval(interval);
         highscore();
     } else {
@@ -71,12 +74,12 @@ function nextQuestion() {
     }
 }
 
-// shows current question and multiple choice answers
+// Shows current question and multiple choice answers
 function showQuestion(question) {
     // Display question
     questionDiv.innerText = question.question;
     questionDiv.setAttribute("class", "questions");
-    // Display answers
+    // Display answers as butoons
     question.answers.forEach(answer => {
         var button = document.createElement("button");
         button.textContent = answer.text;
@@ -102,6 +105,7 @@ function selectAnswer(answer) {
     var selectedAnswer = answer.target;
     var correct = selectedAnswer.dataset.correct;
     if (correct) {
+        // Displays Correct! message when a question is answered correclty
         var correctMsg = document.createElement("div");
         correctMsg.textContent = "Correct!";
         resultsDiv.appendChild(correctMsg);
@@ -110,6 +114,7 @@ function selectAnswer(answer) {
         currentQuestionIndex++;
         nextQuestion();
     } else {
+        // Displays Wrong! message when a question is answered incorreclty
         var wrongMsg = document.createElement("div");
         wrongMsg.textContent = "Wrong!";
         resultsDiv.appendChild(wrongMsg);
@@ -127,31 +132,31 @@ function highscore() {
         resetContainers();
         questionDiv.removeChild(questionDiv.firstChild);
         resultsDiv.removeChild(resultsDiv.firstChild);
-
-        var allDoneMsg = document.createElement("div");
-        allDoneMsg.textContent = "All Done!";
-        questionDiv.appendChild(allDoneMsg);
-        allDoneMsg.setAttribute("class", "allDoneMsg");
-
+        // Displays All Done! message
+        var wellDoneMsg = document.createElement("div");
+        wellDoneMsg.textContent = "Well Done!";
+        questionDiv.appendChild(wellDoneMsg);
+        wellDoneMsg.setAttribute("class", "wellDoneMsg");
+        // Displays users Final Score
         var scoreMsg = document.createElement("div");
-        scoreMsg.textContent = "Your final score is: " + score + ".";
+        scoreMsg.textContent = "You scored: " + score + ".";
         answersDiv.appendChild(scoreMsg);
-
+        // Prompts user to input their initials 
         var enterInitialsMsg = document.createElement("p");
         enterInitialsMsg.textContent = "Enter Your Initials: ";
         resultsDiv.appendChild(enterInitialsMsg);
-
+        // Input field for users initials
         var initialsInput = document.createElement("input");
         initialsInput.type = "text";
         initialsInput.name = "name-text";
+        initialsInput.placeholder = "D.B.";
         initialsInput.setAttribute("class", "initialsInput");
         enterInitialsMsg.appendChild(initialsInput);
-
+        // Submit button to store users Initials in local storage
         var submitBtn = document.createElement("button");
         submitBtn.innerText = "Submit";
         submitBtn.setAttribute("class", "submitBtn");
         enterInitialsMsg.appendChild(submitBtn);
-
     }
 }
 
