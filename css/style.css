@@ -3,34 +3,6 @@ body {
     margin-bottom: 100px;    
 }
 
-/* Game Over Message */
-.gameOver {
-    text-align: center;
-    font-size: larger;
-    font-weight: bold;
-    color: rgb(255, 0, 0);
-}
-
-/* No Score Message */
-.noScore {
-    text-align: center;
-    font-size: large;
-    color: rgb(255, 0, 0);
-}
-
-/* Correct! or Wrong! Message */
-.result {
-    font-size: large;
-    font-style: italic;
-    color: rgb(78, 77, 77);
-}
-
-/* Well Done! Message */
-.wellDoneMsg {
-    font-size: larger;
-    font-weight: bold;
-}
-
 /* Questions Presented in the questions container */
 .questions {
     text-align: left;
@@ -50,6 +22,19 @@ body {
 }
 .answerBtn:hover {
     background-color: #96658a;
+}
+
+/* Correct! or Wrong! Message */
+.result {
+    font-size: large;
+    font-style: italic;
+    color: rgb(78, 77, 77);
+}
+
+/* Well Done! Message */
+.wellDoneMsg {
+    font-size: larger;
+    font-weight: bold;
 }
 
 /* Initials input field */
@@ -73,3 +58,12 @@ body {
 .submitBtn:hover {
     background-color: #96658a;
 }
+
+/* Game Over Message */
+.gameOver {
+    text-align: center;
+    font-size: 32px;
+    font-weight: bold;
+    color: rgb(255, 0, 0);
+}
+

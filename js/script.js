@@ -42,18 +42,17 @@ function countdown() {
             gameOverMsg.textContent = "Game Over!";
             answersDiv.appendChild(gameOverMsg);
             gameOverMsg.setAttribute("class", "gameOver");
-            // Display Try Again message if the timer runs out
-            var endMsg = document.createElement("p");
-            endMsg.textContent = "You didn't score this time, Please try again!";
-            answersDiv.appendChild(endMsg);
-            endMsg.setAttribute("class", "noScore");
             // Displays the Try Again button if the timer runs out
+            var endMsg = document.createElement("p");
+            answersDiv.appendChild(endMsg);
+            endMsg.setAttribute("class", "gameOver");
             var tryAgainBtn = document.createElement("button");
             tryAgainBtn.innerText = "Try Again";
-            resultsDiv.appendChild(tryAgainBtn);
-            tryAgainBtn.setAttribute("class", "btn btn-danger ");
-            // tryAgainBtn.addEventListener('click', window.location.reload());
-
+            tryAgainBtn.onclick = function() {
+                window.location.reload()
+            }
+            endMsg.appendChild(tryAgainBtn);
+            tryAgainBtn.setAttribute("class", "btn btn-danger");   
         } else {
             score = seconds;
         }
