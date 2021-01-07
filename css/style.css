@@ -54,10 +54,9 @@ body {
 
 /* Initials input field */
 .initialsInput {
-    background-color: #7c7c7c;
+    background-color: #cecece;
     border-radius: 5px;
     margin: 5px;
-    color: #eee;
     outline: none;
     width: 75px;
 }
