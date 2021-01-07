@@ -3,38 +3,47 @@ var startButton = document.getElementById("startBtn");
 var questionDiv = document.getElementById("questionCont");
 var answersDiv = document.getElementById("answersCont");
 var resultsDiv = document.getElementById("resultsCont");
+var refreshButton = document.getElementById("clear-highscores");
 
-
-// Shuffle Questions
+// Shuffle Questions variables
 var shuffledQuestions, currentQuestionIndex
 
-// Score
+// Holds score variable
 var score = 0;
 
-// on click of 'Start Quiz' button start the quizStart function
-startButton.addEventListener('click', countdown);
+// Counts total questions answered variable
+var totalQuestions = 0;
+
+// onClick button events
+// startButton.addEventListener('click', countdown);
+startButton.addEventListener('click', quizStart);
 
 // 60 second timer variable
 var seconds = 60;
 
-// Countdown timer
+// Countdown timer starts the presentation of questions and answers
 function countdown() {
-    quizStart();
+    // quizStart();
     interval = setInterval(function () {
         if (seconds <= -1) {
-            resultsDiv.removeChild(resultsDiv.firstChild);
-            questionDiv.removeChild(questionDiv.firstChild);
             clearInterval(interval);
             resetContainers();
+            questionDiv.removeChild(questionDiv.firstChild);
+            resultsDiv.removeChild(resultsDiv.firstChild);
 
             var endMsg = document.createElement("p");
             endMsg.textContent = "You didn't score this time, Please try again!";
             answersDiv.appendChild(endMsg);
             endMsg.setAttribute("class", "noScore");
-            return;
+
+            var tryAgainBtn = document.createElement("button");
+            tryAgainBtn.innerText = "Try Again";
+            resultsDiv.appendChild(tryAgainBtn);
+            tryAgainBtn.setAttribute("class", "btn btn-danger ");
+            // tryAgainBtn.addEventListener('click', window.location.reload());
 
         } else {
-            
+            score = seconds;
         }
         document.getElementById("timer").innerHTML = " Time: " + seconds + " secs";
         seconds--;
@@ -43,19 +52,26 @@ function countdown() {
 
 // Start quiz function also starts the countdown
 function quizStart() {
-    // countdown();
+    countdown();
     shuffledQuestions = questions.sort(() => Math.random() - .5);
     currentQuestionIndex = 0;
     nextQuestion();
-};
+}
 
 // shows next question
 function nextQuestion() {
-    resetContainers();
-    showQuestion(shuffledQuestions[currentQuestionIndex]);
-};
+    totalQuestions++;
+    console.log("questions answered ", totalQuestions);
+    if (totalQuestions === 6) {
+        clearInterval(interval);
+        highscore();
+    } else {
+        resetContainers();
+        showQuestion(shuffledQuestions[currentQuestionIndex]);
+    }
+}
 
-// shows current question and multiple choices answers
+// shows current question and multiple choice answers
 function showQuestion(question) {
     // Display question
     questionDiv.innerText = question.question;
@@ -63,7 +79,7 @@ function showQuestion(question) {
     // Display answers
     question.answers.forEach(answer => {
         var button = document.createElement("button");
-        button.innerText = answer.text;
+        button.textContent = answer.text;
         button.setAttribute("class", "answerBtn");
         if (answer.correct) {
             button.dataset.correct = answer.correct;
@@ -71,46 +87,73 @@ function showQuestion(question) {
         button.addEventListener('click', selectAnswer);
         answersDiv.appendChild(button);
     });
-};
+}
 
-// Resets container before displaying next question and answers
+// Resets answerDiv container before displaying next question and next set of answers
 function resetContainers() {
     while (answersDiv.firstChild) {
         answersDiv.removeChild(answersDiv.firstChild);
     }
-};
+}
 
-// Answer Selected
+// When an answer is chosen, selectAnswer presents either a correct or wrong message
 function selectAnswer(answer) {
     resultsDiv.removeChild(resultsDiv.firstChild);
     var selectedAnswer = answer.target;
     var correct = selectedAnswer.dataset.correct;
     if (correct) {
-
         var correctMsg = document.createElement("div");
         correctMsg.textContent = "Correct!";
         resultsDiv.appendChild(correctMsg);
         correctMsg.setAttribute("class", "result");
-
         shuffledQuestions.length > currentQuestionIndex + 1;
         currentQuestionIndex++;
         nextQuestion();
-
     } else {
-
         var wrongMsg = document.createElement("div");
         wrongMsg.textContent = "Wrong!";
         resultsDiv.appendChild(wrongMsg);
         wrongMsg.setAttribute("class", "result");
-
         seconds -= 10;
-
         shuffledQuestions.length > currentQuestionIndex + 1;
         currentQuestionIndex++;
         nextQuestion();
+    }
+}
+
+// Highscore function to store initials and score in local storage
+function highscore() {
+    if (score >= 1) {
+        resetContainers();
+        questionDiv.removeChild(questionDiv.firstChild);
+        resultsDiv.removeChild(resultsDiv.firstChild);
+
+        var allDoneMsg = document.createElement("div");
+        allDoneMsg.textContent = "All Done!";
+        questionDiv.appendChild(allDoneMsg);
+        allDoneMsg.setAttribute("class", "allDoneMsg");
+
+        var scoreMsg = document.createElement("div");
+        scoreMsg.textContent = "Your final score is: " + score + ".";
+        answersDiv.appendChild(scoreMsg);
+
+        var enterInitialsMsg = document.createElement("p");
+        enterInitialsMsg.textContent = "Enter Your Initials: ";
+        resultsDiv.appendChild(enterInitialsMsg);
+
+        var initialsInput = document.createElement("input");
+        initialsInput.type = "text";
+        initialsInput.name = "name-text";
+        initialsInput.setAttribute("class", "initialsInput");
+        enterInitialsMsg.appendChild(initialsInput);
+
+        var submitBtn = document.createElement("button");
+        submitBtn.innerText = "Submit";
+        submitBtn.setAttribute("class", "submitBtn");
+        enterInitialsMsg.appendChild(submitBtn);
 
     }
-};
+}
 
 // Array of Objects containing 10 JavaScreipt questions
 var questions = [
