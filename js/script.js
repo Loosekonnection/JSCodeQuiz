@@ -32,7 +32,7 @@ var seconds = 60;
 // Countdown timer starts the presentation of questions and answers
 function countdown() {
     interval = setInterval(function () {
-        if (seconds <= -1) {
+        if (seconds <= 0) {
             clearInterval(interval);
             resetContainers();
             questionDiv.removeChild(questionDiv.firstChild);
