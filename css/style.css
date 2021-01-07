@@ -1,26 +1,32 @@
+/* Allows for a fixed footer */
 body {
     margin-bottom: 100px;    
 }
 
-.noScore {
+/* Game Over Message */
+.gameOver {
     text-align: center;
-    font-size: large;
+    font-size: larger;
     font-weight: bold;
     color: rgb(255, 0, 0);
 }
 
+/* No Score Message */
+.noScore {
+    text-align: center;
+    font-size: large;
+    color: rgb(255, 0, 0);
+}
+
+/* Correct! or Wrong! Message */
 .result {
     font-size: large;
     font-style: italic;
     color: rgb(78, 77, 77);
 }
 
-.score {
-    font-size: large;
-    color: rgb(0, 4, 255);
-}
-
-.allDoneMsg {
+/* Well Done! Message */
+.wellDoneMsg {
     font-size: larger;
     font-weight: bold;
 }
@@ -30,10 +36,9 @@ body {
     text-align: left;
     font-size: large;
     font-weight: bold;
-
 }
 
-/* Buttons containing the answers in the answers container */
+/* Answer Button Styling */
 .answerBtn {
     display: grid;
     background-color: #750b5b;
@@ -43,7 +48,6 @@ body {
     color: #eee;
     outline: none;
 }
-
 .answerBtn:hover {
     background-color: #96658a;
 }
@@ -52,10 +56,10 @@ body {
 .initialsInput {
     background-color: #7c7c7c;
     border-radius: 5px;
-    
     margin: 5px;
     color: #eee;
     outline: none;
+    width: 75px;
 }
 
 /* Initials submit button */
@@ -63,12 +67,10 @@ body {
     display: inline-block;
     background-color: #750b5b;
     border-radius: 5px;
-    
     margin: 5px;
     color: #eee;
     outline: none;
 }
-
 .submitBtn:hover {
     background-color: #96658a;
 }
