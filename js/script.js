@@ -17,11 +17,11 @@ var score = 0;
 var totalQuestions = 0;
 
 // onClick button event to start the quiz
-startBtn.addEventListener('click', quizStart);
+startBtn.addEventListener('click', countdown);
 
 // Start quiz function also starts the countdown
 function quizStart() {
-    countdown();
+    // countdown();
     shuffledQuestions = questions.sort(() => Math.random() - .5);
     currentQuestionIndex = 0;
     nextQuestion();
@@ -33,7 +33,9 @@ var seconds = 60;
 // Countdown timer starts the presentation of questions and answers
 function countdown() {
     interval = setInterval(function () {
-        if (seconds <= 0) {
+        if (seconds === 60) {
+            quizStart();
+        } else if (seconds <= 0) {
             clearInterval(interval);
             resetContainers();
             questionDiv.removeChild(questionDiv.firstChild);
@@ -57,7 +59,7 @@ function countdown() {
         } else {
             score = seconds;
         }
-        document.getElementById("timer").textContent = " Time: " + seconds + " secs";
+        document.getElementById("timer").textContent = " Time Left: " + seconds + " secs";
         seconds--;    
     }, 1000);
 }
@@ -65,7 +67,7 @@ function countdown() {
 // Generates next question 
 function nextQuestion() {
     totalQuestions++;
-    if (totalQuestions === 7) {
+    if (totalQuestions === 11) {
         clearInterval(interval);
         gameComplete();
     } else {
@@ -259,12 +261,120 @@ var questions = [
         ],
     },
     {
-        question: "How does a FOR loop start??",
+        question: "How does a FOR loop start?",
         answers: [
             { text: "1. for (i = 0; i <= 5; i++)", correct: true },
             { text: "2. for i = 1 to 5", correct: false },
             { text: "3. for (i = 0; i <= 5)", correct: false },
             { text: "4. for (i <= 5; i++)", correct: false }
+        ],
+    },
+    {
+        question: "How to write an IF statement in JavaScript?",
+        answers: [
+            { text: "1. if i == 5 then", correct: false },
+            { text: "2. if i = 5 then", correct: false },
+            { text: "3. if i = 5", correct: false },
+            { text: "4. if (i == 5)", correct: true }
+        ],
+    },
+    {
+        question: "How do write an IF statement for executing some code if \"i\" is NOT equal to 5?",
+        answers: [
+            { text: "1. if i =! 5 then", correct: false },
+            { text: "2. if (i != 5)", correct: true },
+            { text: "3. if (i <> 5)", correct: false },
+            { text: "4. if i <> 5", correct: false }
+        ],
+    },
+    {
+        question: "How can you add a comment in a JavaScript?",
+        answers: [
+            { text: "1. <!-- This is a comment -->", correct: false },
+            { text: "2. ' This is a comment '", correct: false },
+            { text: "3. // This is a comment", correct: true },
+            { text: "4. !-- This is a comment", correct: false }
+        ],
+    },
+    {
+        question: "How can you add a comment that has more than one line?",
+        answers: [
+            { text: "1. \/* This comment has more than one line */", correct: true },
+            { text: "2. // This comment has more than one line //", correct: false },
+            { text: "3. <!-- This comment has more than one line -->", correct: false },
+            { text: "4. !--This comment has more than one line--", correct: false }
+        ],
+    },
+    {
+        question: "What is the correct way to write a JavaScript array?",
+        answers: [
+            { text: "1. var colors = \"red\", \"green\", \"blue\"", correct: false },
+            { text: "2. var colors = (1:\"red\", 2:\"green\", 3:\"blue\")", correct: false },
+            { text: "3. var colors = 1 = (\"red\"), 2 = (\"green\"), 3 = (\"blue\")", correct: false },
+            { text: "4. var colors = [\"red\", \"green\", \"blue\"]", correct: true }
+        ],
+    },
+    {
+        question: "How do you round the number 7.25, to the nearest integer?",
+        answers: [
+            { text: "1. Math.rnd(7.25)", correct: false },
+            { text: "2. Math.round(7.25)", correct: true },
+            { text: "3. rnd.Math(7.25)", correct: false },
+            { text: "4. round.Math(7.25)", correct: false }
+        ],
+    },
+    {
+        question: "How do you call a function named \"myFunction\"?",
+        answers: [
+            { text: "1. myFunction()", correct: true },
+            { text: "2. call function myFunction()", correct: false },
+            { text: "3. call myFunction()", correct: false },
+            { text: "4. function myFunction()", correct: false }
+        ],
+    },
+    {
+        question: "Which event occurs when the user clicks on an HTML element?",
+        answers: [
+            { text: "1. onmouseclick", correct: false },
+            { text: "2. onclick", correct: true },
+            { text: "3. onchange", correct: false },
+            { text: "4. onmouseover", correct: false }
+        ],
+    },
+    {
+        question: "How do you create a function in JavaScript?",
+        answers: [
+            { text: "1. function:myFunction()", correct: false },
+            { text: "2. function = myFunction()", correct: false },
+            { text: "3. function myFunction()", correct: true },
+            { text: "4. function-myFunction()", correct: false }
+        ],
+    },
+    {
+        question: "What is the correct syntax for referring to an external script called \"xxx.js\"?",
+        answers: [
+            { text: "1. <script src=\"xxx.js\">", correct: true },
+            { text: "2. <script name=\"xxx.js\">", correct: false },
+            { text: "3. <script href=\"xxx.js\">", correct: false },
+            { text: "4. <script file=\"xxx.js\">", correct: false }
+        ],
+    },
+    {
+        question: "How can you detect the client's browser name?",
+        answers: [
+            { text: "1. navigator.appName", correct: true },
+            { text: "2. client.navName", correct: false },
+            { text: "3. browser.name", correct: false },
+            { text: "4. navigator.browserName", correct: false }
+        ],
+    },
+    {
+        question: "How do you declare a JavaScript variable?",
+        answers: [
+            { text: "1. v = carName;", correct: false },
+            { text: "2. variable carName;", correct: false },
+            { text: "3. v carName;", correct: false },
+            { text: "4. var carName;", correct: true }
         ],
     },
 ];
