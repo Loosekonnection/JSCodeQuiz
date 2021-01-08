@@ -30,7 +30,8 @@ function quizStart() {
 // 60 second timer variable
 var seconds = 60;
 
-// Countdown timer starts the presentation of questions and answers
+// Countdown timer starts the presentation of questions, answers and a timer
+// If the timer runs out the game is anounced as over
 function countdown() {
     interval = setInterval(function () {
         if (seconds === 60) {
@@ -64,10 +65,10 @@ function countdown() {
     }, 1000);
 }
 
-// Generates next question 
+// Generates next question, but no more than 10
 function nextQuestion() {
     totalQuestions++;
-    if (totalQuestions === 11) {
+    if (totalQuestions > 10) {
         clearInterval(interval);
         gameComplete();
     } else {
@@ -131,7 +132,7 @@ function selectAnswer(answer) {
 // Localstorage Variable
 var highScores = JSON.parse(localStorage.getItem("highScores")) || [];
 
-// gameComplete function to request initials and store initials with score in local storage as an array of objects
+// gameComplete function to request name and store name with score in local storage as an array of objects
 function gameComplete() {
     if (score >= 1) {
         resetContainers();
@@ -146,34 +147,35 @@ function gameComplete() {
         var scoreMsg = document.createElement("div");
         scoreMsg.textContent = "You scored: " + score + ".";
         answersDiv.appendChild(scoreMsg);
-        // Prompts user to input their initials 
-        var enterInitialsMsg = document.createElement("p");
-        enterInitialsMsg.textContent = "Enter Your Initials: ";
-        resultsDiv.appendChild(enterInitialsMsg);
-        // Input field for users initials
-        var initialsInput = document.createElement("input");
-        initialsInput.type = "text";
-        initialsInput.value = "";
-        initialsInput.placeholder = "D.B.";
-        initialsInput.setAttribute("class", "initialsInput");
-        enterInitialsMsg.appendChild(initialsInput);
-        // Submit button to store users Initials in local storage array
+        // Prompts user to input their name 
+        var enternameMsg = document.createElement("p");
+        enternameMsg.textContent = "Enter Your Name: ";
+        resultsDiv.appendChild(enternameMsg);
+        // Input field for users name
+        var nameInput = document.createElement("input");
+        nameInput.type = "text";
+        nameInput.value = "";
+        nameInput.maxLength = "15";
+        nameInput.placeholder = "Mickey Mouse";
+        nameInput.setAttribute("class", "nameInput");
+        enternameMsg.appendChild(nameInput);
+        // Submit button stores users name in local storage array
         var submitBtn = document.createElement("button");
         submitBtn.innerText = "Submit";
         submitBtn.onclick = function(e) {
             e.preventDefault();
             var highScore = {
                 highScore: score,
-                name: initialsInput.value
+                name: nameInput.value
             };
             highScores.push(highScore);
             highScores.sort((a,b) => b.highScore - a.highScore);
-            highScores.splice(5);
+            highScores.splice(10);
             localStorage.setItem("highScores", JSON.stringify(highScores));
             document.location.assign(src="highscores.html");
         }
         submitBtn.setAttribute("class", "submitBtn");
-        enterInitialsMsg.appendChild(submitBtn);
+        enternameMsg.appendChild(submitBtn);
     }
 }
 
