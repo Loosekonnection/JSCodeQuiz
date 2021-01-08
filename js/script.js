@@ -1,9 +1,10 @@
 // Variables of HTML id's
-var startButton = document.getElementById("startBtn");
+var startBtn = document.getElementById("startBtn");
+var highScoreBtn = document.getElementById("highScoreBtn");
 var questionDiv = document.getElementById("questionCont");
 var answersDiv = document.getElementById("answersCont");
 var resultsDiv = document.getElementById("resultsCont");
-var refreshButton = document.getElementById("clear-highscores");
+var refreshButton = document.getElementById("clear-highScores");
 var timer = document.getElementById("timer");
 
 // Shuffle Questions variables
@@ -16,7 +17,7 @@ var score = 0;
 var totalQuestions = 0;
 
 // onClick button event to start the quiz
-startButton.addEventListener('click', quizStart);
+startBtn.addEventListener('click', quizStart);
 
 // Start quiz function also starts the countdown
 function quizStart() {
@@ -40,19 +41,19 @@ function countdown() {
             // Displays Game Over! if the timer runs out
             var gameOverMsg = document.createElement("p");
             gameOverMsg.textContent = "Game Over!";
-            answersDiv.appendChild(gameOverMsg);
             gameOverMsg.setAttribute("class", "gameOver");
+            answersDiv.appendChild(gameOverMsg);
             // Displays the Try Again button if the timer runs out
             var endMsg = document.createElement("p");
-            answersDiv.appendChild(endMsg);
             endMsg.setAttribute("class", "gameOver");
+            answersDiv.appendChild(endMsg);
             var tryAgainBtn = document.createElement("button");
             tryAgainBtn.innerText = "Try Again";
             tryAgainBtn.onclick = function() {
-                window.location.reload()
+                document.location.assign(src="index.html");
             }
             endMsg.appendChild(tryAgainBtn);
-            tryAgainBtn.setAttribute("class", "btn btn-danger");   
+            tryAgainBtn.setAttribute("class", "btn btn-danger");
         } else {
             score = seconds;
         }
@@ -66,14 +67,14 @@ function nextQuestion() {
     totalQuestions++;
     if (totalQuestions === 7) {
         clearInterval(interval);
-        highscore();
+        gameComplete();
     } else {
         resetContainers();
         showQuestion(shuffledQuestions[currentQuestionIndex]);
     }
 }
 
-// Shows current question and multiple choice answers
+// Displays current question and respective multiple choice answers
 function showQuestion(question) {
     // Display question
     questionDiv.innerText = question.question;
@@ -91,14 +92,14 @@ function showQuestion(question) {
     });
 }
 
-// Resets answerDiv container before displaying next question and next set of answers
+// Resets answerDiv container before displaying next question and answers
 function resetContainers() {
     while (answersDiv.firstChild) {
         answersDiv.removeChild(answersDiv.firstChild);
     }
 }
 
-// When an answer is chosen, selectAnswer presents either a correct or wrong message
+// When an answer is chosen, selectAnswer display either a correct or wrong message
 function selectAnswer(answer) {
     resultsDiv.removeChild(resultsDiv.firstChild);
     var selectedAnswer = answer.target;
@@ -107,8 +108,8 @@ function selectAnswer(answer) {
         // Displays Correct! message when a question is answered correclty
         var correctMsg = document.createElement("div");
         correctMsg.textContent = "Correct!";
-        resultsDiv.appendChild(correctMsg);
         correctMsg.setAttribute("class", "result");
+        resultsDiv.appendChild(correctMsg);
         shuffledQuestions.length > currentQuestionIndex + 1;
         currentQuestionIndex++;
         nextQuestion();
@@ -116,8 +117,8 @@ function selectAnswer(answer) {
         // Displays Wrong! message when a question is answered incorreclty
         var wrongMsg = document.createElement("div");
         wrongMsg.textContent = "Wrong!";
-        resultsDiv.appendChild(wrongMsg);
         wrongMsg.setAttribute("class", "result");
+        resultsDiv.appendChild(wrongMsg);
         seconds -= 10;
         shuffledQuestions.length > currentQuestionIndex + 1;
         currentQuestionIndex++;
@@ -125,8 +126,11 @@ function selectAnswer(answer) {
     }
 }
 
-// Highscore function to store initials and score in local storage
-function highscore() {
+// Localstorage Variable
+var highScores = JSON.parse(localStorage.getItem("highScores")) || [];
+
+// gameComplete function to request initials and store initials with score in local storage as an array of objects
+function gameComplete() {
     if (score >= 1) {
         resetContainers();
         questionDiv.removeChild(questionDiv.firstChild);
@@ -134,8 +138,8 @@ function highscore() {
         // Displays All Done! message
         var wellDoneMsg = document.createElement("div");
         wellDoneMsg.textContent = "Well Done!";
-        questionDiv.appendChild(wellDoneMsg);
         wellDoneMsg.setAttribute("class", "wellDoneMsg");
+        questionDiv.appendChild(wellDoneMsg);
         // Displays users Final Score
         var scoreMsg = document.createElement("div");
         scoreMsg.textContent = "You scored: " + score + ".";
@@ -147,19 +151,31 @@ function highscore() {
         // Input field for users initials
         var initialsInput = document.createElement("input");
         initialsInput.type = "text";
-        initialsInput.name = "name-text";
+        initialsInput.value = "";
         initialsInput.placeholder = "D.B.";
         initialsInput.setAttribute("class", "initialsInput");
         enterInitialsMsg.appendChild(initialsInput);
-        // Submit button to store users Initials in local storage
+        // Submit button to store users Initials in local storage array
         var submitBtn = document.createElement("button");
         submitBtn.innerText = "Submit";
+        submitBtn.onclick = function(e) {
+            e.preventDefault();
+            var highScore = {
+                highScore: score,
+                name: initialsInput.value
+            };
+            highScores.push(highScore);
+            highScores.sort((a,b) => b.highScore - a.highScore);
+            highScores.splice(5);
+            localStorage.setItem("highScores", JSON.stringify(highScores));
+            document.location.assign(src="highscores.html");
+        }
         submitBtn.setAttribute("class", "submitBtn");
         enterInitialsMsg.appendChild(submitBtn);
     }
 }
 
-// Array of Objects containing 10 JavaScreipt questions
+// Array of Objects - containing 10 JavaScript questions
 var questions = [
     {
         question: "Who invented JavaScript?",
