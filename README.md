@@ -101,4 +101,4 @@ Quiz about JavaScript coding
 <br>
 
 ---
-© 2020 Loosekonnection, Working towards being a Full Stack Dev.
+© 2021 Loosekonnection, Working towards being a Full Stack Dev.
