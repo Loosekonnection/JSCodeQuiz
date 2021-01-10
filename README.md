@@ -1,15 +1,15 @@
 # JSCodeQuiz
 Quiz about JavaScript coding
 
-*   GitHub Repository [JavaScript Coding Quiz](https://github.com/Loosekonnection/JSCodingQuiz)
-*   GitHub Pages URL [Coding Quiz Webpage](https://loosekonnection.github.io/JSCodingQuiz/)
+*   GitHub Repository [JavaScript Coding Quiz](https://github.com/Loosekonnection/JSCodeQuiz)
+*   GitHub Pages URL [Coding Quiz Webpage](https://loosekonnection.github.io/JSCodeQuiz/)
 ---
 
 <br>
 
 ## Pseudo Code
 
-*   A HTML page needs creating with respective id's to hold the quiz and the dynamically created questions.
+*   An HTML page needs creating with respective id's to hold the quiz and the dynamically created questions.
 *   HTML Page Elements required would be:
 
     *   Navigation Section
@@ -18,7 +18,7 @@ Quiz about JavaScript coding
     *   Footer Section
 
 *   The home page will need an brief explanation of the quiz.
-*   There will need to be a Start Quiz button on the home page that dynamically via JS displays a questions with its respective answers.
+*   There will need to be a Start Quiz button on the home page that dynamically via JS displays a series of questions with there respective answers.
 *   Upon the selection of an answer the next question should be then displayed dynamically via JS.
 *   If the question is correct then the player should be notified via a ```Correct!``` message.
 *   If the question is incorrect the player should be notified via a ```Wrong!``` message.
@@ -26,7 +26,7 @@ Quiz about JavaScript coding
 *   If all questions are not answered within the time frame, a game over message with the ability to retry will need to be displayed.
 *   If all of the questions are answered within the time frame, the time left on the timer should be displayed as the players score.
 *   The displayed score should be presented with an input field for the player to submit and record their initials or name along with the score.
-*   The players initials/name and score will need to be stored in the local storage (as we are not using a db for this).
+*   The players initials/name and score will need to be stored in the local storage (as we are not using a database for this).
 *   The site will need a High Scores page to display recorded high scores.
 *   The High Scores page will need HTML page elements and id's for both static and dynamic content:
 
@@ -35,9 +35,9 @@ Quiz about JavaScript coding
     *   High Scores Section
     *   Footer Section
 
-*   The High Scores page will also need two buttons:
+*   The High Scores page will also have two buttons:
 
-    *   Go Back - to return the user to the home page.
+    *   Go Back - to return the user to the home page. (although the NAV will contain a link to the homepage)
     *   Clear High Scores - Clear the local storage which will clear the High Scores table/page.
 
 
@@ -49,6 +49,11 @@ Quiz about JavaScript coding
 ##  Using the Quiz
 
 *   The JavaScript Coding Quiz home page has a breif description and start quiz button.
+*   The links in the NAV can be used as follows:
+
+    *   GitHub Repo - redirect to the GitHub Repository.
+    *   Home - Homepage which is the main landing page.
+    *   HighScores - Redirects to the High Scores page and table.   
 
 ![alt](README_img/screenshot_01.PNG)
 
