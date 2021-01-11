@@ -5,8 +5,7 @@ var highScores = JSON.parse(localStorage.getItem("highScores")) || [];
 highScoresList.innerHTML = highScores
     .map(score => {
         return `<li>${score.name} - ${score.highScore}</li>`;
-    })
-    .join("");
+    }).join("");
 
 // Go Back button - returns user to the homepage
 var goBackBtn = document.getElementById("goBackBtn");
@@ -21,5 +20,5 @@ highScoreBtn.addEventListener('click', clearLocalStorage);
 
 function clearLocalStorage() {
     localStorage.clear();
-    window.location.reload()
+    window.location.reload();
 }
