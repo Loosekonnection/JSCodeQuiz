@@ -1,114 +1,101 @@
-# JSCodeQuiz
-Quiz about JavaScript coding
 
-*   GitHub Repository [JavaScript Coding Quiz](https://github.com/Loosekonnection/JSCodeQuiz)
-*   GitHub Pages URL [Coding Quiz Webpage](https://loosekonnection.github.io/JSCodeQuiz/)
----
+# JavaScript Code Quiz
+
+## Description 
+
+*A summary of what this project is, and why it has been created:*
+
+This project is a quiz that presents JavaScript questions that are randomly picked form a pool of questions. The site is coded using HTML, CSS & jQuery.
 
 <br>
 
-## Pseudo Code
-
-*   An HTML page needs creating with respective id's to hold the quiz and the dynamically created questions.
-*   HTML Page Elements required would be:
-
-    *   Navigation Section
-    *   Banner Section
-    *   Quiz Section
-    *   Footer Section
-
-*   The home page will need an brief explanation of the quiz.
-*   There will need to be a Start Quiz button on the home page that dynamically via JS displays a series of questions with there respective answers.
-*   Upon the selection of an answer the next question should be then displayed dynamically via JS.
-*   If the question is correct then the player should be notified via a ```Correct!``` message.
-*   If the question is incorrect the player should be notified via a ```Wrong!``` message.
-*   Upon starting the quiz there will need to be a dynamically JS displayed countdown timer.
-*   If all questions are not answered within the time frame, a game over message with the ability to retry will need to be displayed.
-*   If all of the questions are answered within the time frame, the time left on the timer should be displayed as the players score.
-*   The displayed score should be presented with an input field for the player to submit and record their initials or name along with the score.
-*   The players initials/name and score will need to be stored in the local storage (as we are not using a database for this).
-*   The site will need a High Scores page to display recorded high scores.
-*   The High Scores page will need HTML page elements and id's for both static and dynamic content:
-
-    *   Navigation Section
-    *   Banner Section
-    *   High Scores Section
-    *   Footer Section
-
-*   The High Scores page will also have two buttons:
-
-    *   Go Back - to return the user to the home page. (although the NAV will contain a link to the homepage)
-    *   Clear High Scores - Clear the local storage which will clear the High Scores table/page.
-
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 ---
 
 <br>
 
-## Technolgies Used
 
-*   HMTL [w3schools.com Learn HTML](https://www.w3schools.com/html/default.asp)
-*   CSS [w3schools.com Learn CSS](https://www.w3schools.com/css/default.asp)
-*   Boostrap [w3schools.com Bootstrap4 Tutorial](https://www.w3schools.com/bootstrap4/default.asp)
-*   JavaScript [w3schools.com JavaScript Tutorial](https://www.w3schools.com/js/default.asp)
-*   jQuery [w3schools.com jQuery Tutorial](https://www.w3schools.com/jquery/default.asp)
+## Table of Contents       
+   * [Installation](#installation)
+   * [Usage](#usage)
+   * [Contributing](#contributing)    
+   * [Tests](#tests)    
+   * [License](#license)
+   * [Questions](#questions)
 ---
 
 <br>
 
-##  Using the Quiz
+## Installation
 
-*   The JavaScript Coding Quiz home page has a breif description and start quiz button.
-*   The links in the NAV can be used as follows:
+*How to install this project:*
 
-    *   GitHub Repo - redirect to the GitHub Repository.
-    *   Home - Homepage which is the main landing page.
-    *   HighScores - Redirects to the High Scores page and table.   
+You can clone this repository to a local directory or fork the repository and take a copy.
 
-![alt](README_img/screenshot_01.PNG)
+ 
+---
 
-*   Upon clicking the 'Start Quiz' button the quiz randomly picks 10 questions to answer from a pool of questions.
-*   You will need to choose/select an answer to progress to the next question.
-*   There is a timer of 60 seconds that starts immediately upon starting the quiz.
+<br>
 
-![alt](README_img/screenshot_02.PNG)
+## Usage 
 
-*   You will be advised if your answer selection was Correct! or Wrong!
+*How to use this project:*
 
-![alt](README_img/screenshot_03.PNG)
+The site can either be used via the published link on my GitHub account: [JSCodeQuiz](https://loosekonnection.github.io/JSCodeQuiz), or once the repo is copied locally it can be used from running the index.html file in a web browser of your choice. <br> <br> ![alt](README_img/screenshot_01.PNG) <br> <br> Upon clicking the 'Start Quiz' button the quiz randomly picks 10 questions to answer from a pool of questions. <br> <br> ![alt](README_img/screenshot_02.PNG) <br> <br> You will be advised if your answer selection was Correct! or Wrong! <br> <br> ![alt](README_img/screenshot_03.PNG) <br> <br> For every incorrect answer 10 seconds is taken from the countdown timer. If the timer ends before the player can complete all questions, a Game Over! message is displayed and a retry button is displayed. <br> <br> If a player succesfully completes all 10 questions within the 60 seconds, The players score is the remaining time left over after completing all 10 questions. The player is then prompted to input their initials/name. <br> <br> ![alt](README_img/screenshot_05.PNG) <br> <br> The player's initials and score are then added to the Highscore table. <br> <br> ![alt](README_img/screenshot_06.PNG)
 
-*   For every incorrect answer 10 seconds is taken from the countdown timer.
-*   If the timer ends before the player can complete all questions, a Game Over! message is displayed and a retry button is displayed.
-
-![alt](README_img/screenshot_04.PNG)
-
-*   If a player succesfully completes all 10 questions within the 60 seconds, The players score is the remaining time left over after completing all 10 questions.
-*   The player is then prompted to input their initials/name.
-
-![alt](README_img/screenshot_05.PNG)
-
-*   The player's initials and score are then added to the Highscore table.
-
-![alt](README_img/screenshot_06.PNG)
 
 ---
 
 <br>
 
-## Credits
+## Contributing
 
-*   University of Birmingham [Coding Boot Camp](https://bootcamp.birmingham.ac.uk/coding/)
-*   The Document Object Model [The Net Ninja](https://www.youtube.com/watch?v=wKBu_dEaF9E&list=PL4cUxeGkcC9haFPT7J25Q9GRB_ZkFrQAc&index=6)
-*   DOM crash course with Brad Traversy [Traversy Media](https://www.youtube.com/watch?v=0ik6X4DJKCc&list=PLillGF-RfqbbnEGy3ROiLWk7JMCuSyQtX&index=2)
-*   Most of the answers to my research on this project have come from [Stack Overflow](https://stackoverflow.com/).
-*   For syntax help when finding a solution elsewhere [w3schools.com](https://www.w3schools.com/jsref/default.asp) is and has been a fantastic reference guide to use along with Stack Overflow.
+*If you like what you see and you would like to contribute, here's how you can:*
 
+Please use the below contact details in the questions section to reach out with a contribution request. I will then give you access so you can work onthe project. There are many areas that could be improved upon and any additional ideas and critique are welcomed.
+
+ 
 ---
-<br>
-
-![code-review](https://img.shields.io/badge/code--review-ready%20for%20review-green)
 
 <br>
 
+## Tests
+
+*Tests that have been run, and how to run them:*
+
+The only tests performed on this project are the manual ones from within a web browser, trial and error, if it works great if not work towards resolving why.
+
+
 ---
-© 2021 Loosekonnection, Working towards being a Full Stack Dev.
+
+<br>
+
+## License
+
+*The following license has been applied to this project:*
+
+MIT License - for more detail [Visit Site](https://opensource.org/licenses/MIT)
+
+
+---
+
+<br>
+
+## Questions?
+
+*For any questions regarding this project, please use either of the below contact details:*
+
+GitHub: [@loosekonnection](https://github.com/loosekonnection)
+
+Email: loosekonnection@gmail.com
+
+
+---
+
+<br>
+
+## Copyright
+
+© 2021 - Loosekonnection - Getting there, but have a long road ahead.
+
